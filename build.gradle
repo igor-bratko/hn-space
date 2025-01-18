@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation files('libs/model.jar')
+    implementation files('libs/netty-framework1.jar')
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}

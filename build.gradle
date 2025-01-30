@@ -8,8 +8,8 @@ repositories {
 }
 
 dependencies {
-    implementation files('libs/model.jar')
-    implementation files('libs/netty-framework1.jar')
+    implementation files('libs/model1.jar')
+    implementation files('libs/netty-framework.jar')
 }
 
 repositories {

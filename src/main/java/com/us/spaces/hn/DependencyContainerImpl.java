@@ -1,4 +1,4 @@
-package com.us.spaces.hr;
+package com.us.spaces.hn;
 
 import com.us.framework.model.DefaultHttpResponse;
 import com.us.framework.model.DependencyContainer;
@@ -14,6 +14,7 @@ public class DependencyContainerImpl implements DependencyContainer {
     public List<HttpRoute> getRoutes() {
         List<HttpRoute> routes = new ArrayList<>();
 
+        routes.add(new HttpRoute("GET", "/api/stories/type/{type}",new StoryHandler()));
         routes.add(new HttpRoute("GET", "/api/{param}", r -> new DefaultHttpResponse("first router")));
         routes.add(new HttpRoute("POST", "/api/{param}/resource", r -> {
             var body = r.getBody(Map.class);

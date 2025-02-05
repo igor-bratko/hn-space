@@ -4,16 +4,17 @@ plugins {
 
 
 repositories {
-    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/igor-bratko/us-framework")
+        credentials {
+            username = findProperty("GITHUB_US_FRAMEWORK_ACTOR")
+            password = findProperty("GITHUB_US_FRAMEWORK_TOKEN")
+        }
+    }
 }
 
 dependencies {
-    implementation files('libs/model1.jar')
-    implementation files('libs/netty-framework.jar')
-}
-
-repositories {
-    flatDir {
-        dirs 'libs'
-    }
+    implementation("com.us:model:0.0.1")
+    implementation("com.us:server-netty:0.0.1")
+    implementation("com.us:db-apache:0.0.6")
 }

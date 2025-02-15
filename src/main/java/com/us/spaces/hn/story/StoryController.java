@@ -1,8 +1,9 @@
-package com.us.spaces.hn;
+package com.us.spaces.hn.story;
 
 import com.us.framework.model.server.HttpRequest;
 import com.us.framework.model.server.HttpResponse;
-import com.us.spaces.hn.Story.PostComment;
+import com.us.spaces.hn.ErrorDto;
+import com.us.spaces.hn.story.Story.PostComment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,6 +92,4 @@ public class StoryController {
         }
     }
 
-    public record ErrorDto(String message, String details) {
-    }
 }

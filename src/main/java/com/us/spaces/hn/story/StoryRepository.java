@@ -1,8 +1,8 @@
-package com.us.spaces.hn;
+package com.us.spaces.hn.story;
 
 import com.us.framework.model.db.Db;
-import com.us.spaces.hn.Story.Comment;
-import com.us.spaces.hn.Story.PostComment;
+import com.us.spaces.hn.story.Story.Comment;
+import com.us.spaces.hn.story.Story.PostComment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -59,7 +59,7 @@ public class StoryRepository {
     public List<Comment> getStoryComments(String storyId) {
         var sql = """
                 SELECT * FROM
-                comment c
+                comment c.
                 WHERE story_id = ?
                 """;
 

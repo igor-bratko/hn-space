@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.HttpCookie;
+import java.util.Map;
 
 import static java.util.Objects.requireNonNull;
 
@@ -101,6 +102,16 @@ public class AuthController {
                 .status(200)
                 .addHeader(SET_COOKIE, removeSessionCookie.toString())
                 .addHeader(SET_COOKIE, removeUserIdCookie.toString());
+    }
+
+    public HttpResponse me(HttpRequest req) {
+        var sessionCookie = req.getCookies().get("u_session_id");
+        requireNonNull(sessionCookie);
+
+        var id = sessionService.get(sessionCookie.getValue()).userId();
+        return new HttpResponse()
+                .status(200)
+                .body(Map.of("userId", id));
     }
 
     public record SignUpRequest(String username, String password) {

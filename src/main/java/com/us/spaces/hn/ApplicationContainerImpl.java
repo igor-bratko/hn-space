@@ -48,6 +48,6 @@ public class ApplicationContainerImpl extends ApplicationContainer {
 
     @Override
     public int getPort() {
-        return 8089;
+        return 8082;
     }
 }

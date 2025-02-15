@@ -106,12 +106,18 @@ public class AuthController {
 
     public HttpResponse me(HttpRequest req) {
         var sessionCookie = req.getCookies().get("u_session_id");
-        requireNonNull(sessionCookie);
+        if (sessionCookie == null) {
+            return new HttpResponse().status(401).body(Map.of("error", "401"));
+        }
 
-        var id = sessionService.get(sessionCookie.getValue()).userId();
-        return new HttpResponse()
-                .status(200)
-                .body(Map.of("userId", id));
+        try {
+            var id = sessionService.get(sessionCookie.getValue()).userId();
+            return new HttpResponse()
+                    .status(200)
+                    .body(Map.of("userId", id));
+        } catch (Exception e) {
+            return new HttpResponse().status(401).body(Map.of("error", "401"));
+        }
     }
 
     public record SignUpRequest(String username, String password) {

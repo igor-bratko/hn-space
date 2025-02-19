@@ -107,6 +107,8 @@ public class AuthController {
     public HttpResponse me(HttpRequest req) {
         var sessionCookie = req.getCookies().get("u_session_id");
         if (sessionCookie == null) {
+            log.info("u_session_id cookies is absent");
+
             return new HttpResponse().status(401).body(Map.of("error", "401"));
         }
 
@@ -116,6 +118,8 @@ public class AuthController {
                     .status(200)
                     .body(Map.of("userId", id));
         } catch (Exception e) {
+            log.error("Error: ", e);
+
             return new HttpResponse().status(401).body(Map.of("error", "401"));
         }
     }

@@ -76,8 +76,8 @@ public class AuthController {
 
         return new HttpResponse()
                 .status(200)
-                .addHeader(SET_COOKIE, sessionCookie.toString())
-                .addHeader(SET_COOKIE, userIdCookie.toString());
+                .addHeader(SET_COOKIE, CookieFormatter.toString(sessionCookie))
+                .addHeader(SET_COOKIE, CookieFormatter.toString(userIdCookie));
     }
 
     public HttpResponse logout(HttpRequest req) {
@@ -100,8 +100,8 @@ public class AuthController {
 
         return new HttpResponse()
                 .status(200)
-                .addHeader(SET_COOKIE, removeSessionCookie.toString())
-                .addHeader(SET_COOKIE, removeUserIdCookie.toString());
+                .addHeader(SET_COOKIE, CookieFormatter.toString(removeSessionCookie))
+                .addHeader(SET_COOKIE, CookieFormatter.toString(removeUserIdCookie));
     }
 
     public HttpResponse me(HttpRequest req) {

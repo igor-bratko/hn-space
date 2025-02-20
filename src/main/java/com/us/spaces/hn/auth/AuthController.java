@@ -87,16 +87,16 @@ public class AuthController {
         sessionService.deleteSession(sessionCookie.getValue());
 
         var removeSessionCookie = new HttpCookie("u_session_id", "");
-        sessionCookie.setHttpOnly(true);
-        sessionCookie.setSecure(true);
-        sessionCookie.setPath("/");
-        sessionCookie.setMaxAge(0);
+        removeSessionCookie.setHttpOnly(true);
+        removeSessionCookie.setSecure(true);
+        removeSessionCookie.setPath("/");
+        removeSessionCookie.setMaxAge(0);
 
         var removeUserIdCookie = new HttpCookie("u_user_id", "");
-        sessionCookie.setHttpOnly(true);
-        sessionCookie.setSecure(true);
-        sessionCookie.setPath("/");
-        sessionCookie.setMaxAge(0);
+        removeUserIdCookie.setHttpOnly(true);
+        removeUserIdCookie.setSecure(true);
+        removeUserIdCookie.setPath("/");
+        removeUserIdCookie.setMaxAge(0);
 
         return new HttpResponse()
                 .status(200)
@@ -105,8 +105,6 @@ public class AuthController {
     }
 
     public HttpResponse me(HttpRequest req) {
-        log.info("Headers {}", req.headers().toString());
-
         var sessionCookie = req.getCookies().get("u_session_id");
         if (sessionCookie == null) {
             log.info("u_session_id cookies is absent");
@@ -115,10 +113,10 @@ public class AuthController {
         }
 
         try {
-            var id = sessionService.get(sessionCookie.getValue()).userId();
+            var session = sessionService.get(sessionCookie.getValue());
             return new HttpResponse()
                     .status(200)
-                    .body(Map.of("userId", id));
+                    .body(Map.of("userId", session.userId(), "username", session.username()));
         } catch (Exception e) {
             log.error("Error: ", e);
 

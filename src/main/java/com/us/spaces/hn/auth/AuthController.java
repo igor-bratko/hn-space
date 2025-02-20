@@ -124,9 +124,7 @@ public class AuthController {
         }
     }
 
-    public record SignUpRequest(String username, String password) {
-    }
+    public record SignUpRequest(String username, String password) {}
 
-    public record SignInRequest(String username, String password) {
-    }
+    public record SignInRequest(String username, String password) {}
 }

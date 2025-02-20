@@ -37,6 +37,7 @@ public class ApplicationContainerImpl extends ApplicationContainer {
         routes.add(new HttpRoute("POST", "/api/auth/logout", authController::logout));
         routes.add(new HttpRoute("GET", "/api/me", authController::me));
         routes.add(new HttpRoute("GET", "/api/profile", profileController::getProfile));
+        routes.add(new HttpRoute("PUT", "/api/profile", profileController::updateProfile));
 
         return routes;
     }

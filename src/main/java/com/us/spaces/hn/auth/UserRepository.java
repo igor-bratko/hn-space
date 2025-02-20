@@ -57,4 +57,14 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean updateProfile(String userId, UpdateProfileRequest update) {
+        var updated = db.update("""
+                  UPDATE "user"
+                  SET about = ?
+                  WHERE id = ?
+                """, update.about(), userId);
+
+        return updated == 1;
+    }
 }

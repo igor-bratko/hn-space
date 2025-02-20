@@ -34,4 +34,17 @@ public class ProfileController {
             return new HttpResponse().status(500).body(new ErrorDto("Server error", e.getMessage()));
         }
     }
+
+    public HttpResponse updateProfile(HttpRequest req) {
+        try {
+            var userIdCookie = req.getCookies().get("u_user_id");
+            var update = req.body().bodyAs(UpdateProfileRequest.class);
+            var updated = userRepository.updateProfile(userIdCookie.getValue(), update);
+
+            return new HttpResponse().body(Map.of("success", updated)).status(200);
+        } catch (Exception e) {
+            log.error("Error", e);
+            return new HttpResponse().status(500).body(new ErrorDto("Server error", e.getMessage()));
+        }
+    }
 }

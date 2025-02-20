@@ -60,7 +60,7 @@ public class AuthController {
 
         var user = userService.login(userReq.username(), userReq.password());
 
-        var session = sessionService.createSession(userReq.username(), userReq.password());
+        var session = sessionService.createSession(user.id(), user.username());
 
         var sessionCookie = new HttpCookie("u_session_id", session);
         sessionCookie.setHttpOnly(true);

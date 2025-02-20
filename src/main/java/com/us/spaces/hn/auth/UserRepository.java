@@ -49,7 +49,7 @@ public class UserRepository {
                         var username = rs1.getString("username");
                         var karma = rs1.getInt("karma");
                         var about = rs1.getString("about");
-                        var createdAt = rs1.getTimestamp("created_at").toInstant().getEpochSecond();
+                        var createdAt = rs1.getTimestamp("created_at").toInstant().toEpochMilli();
                         return new UserProfile(userId, username, karma, about, createdAt);
                     },
                     userId);

@@ -3,10 +3,7 @@ package com.us.spaces.hn;
 import com.us.framework.model.ApplicationContainer;
 import com.us.framework.model.db.DbConfig;
 import com.us.framework.model.server.HttpRoute;
-import com.us.spaces.hn.auth.AuthController;
-import com.us.spaces.hn.auth.SessionService;
-import com.us.spaces.hn.auth.UserRepository;
-import com.us.spaces.hn.auth.UserService;
+import com.us.spaces.hn.auth.*;
 import com.us.spaces.hn.story.StoryController;
 import com.us.spaces.hn.story.StoryRepository;
 
@@ -27,6 +24,7 @@ public class ApplicationContainerImpl extends ApplicationContainer {
         var sessionService = new SessionService(db, jsonConverter);
         var userService = new UserService(userRepository);
         var authController = new AuthController(userRepository, sessionService, userService);
+        var profileController = new ProfileController(userRepository);
 
         var routes = new ArrayList<HttpRoute>();
         routes.add(new HttpRoute("POST", "/api/stories", storyController::createStory));
@@ -38,6 +36,7 @@ public class ApplicationContainerImpl extends ApplicationContainer {
         routes.add(new HttpRoute("POST", "/api/auth/sign-in", authController::signIn));
         routes.add(new HttpRoute("POST", "/api/auth/logout", authController::logout));
         routes.add(new HttpRoute("GET", "/api/me", authController::me));
+        routes.add(new HttpRoute("GET", "/api/profile", profileController::getProfile));
 
         return routes;
     }

@@ -105,6 +105,8 @@ public class AuthController {
     }
 
     public HttpResponse me(HttpRequest req) {
+        log.info("Headers {}", req.headers().toString());
+
         var sessionCookie = req.getCookies().get("u_session_id");
         if (sessionCookie == null) {
             log.info("u_session_id cookies is absent");
@@ -124,7 +126,9 @@ public class AuthController {
         }
     }
 
-    public record SignUpRequest(String username, String password) {}
+    public record SignUpRequest(String username, String password) {
+    }
 
-    public record SignInRequest(String username, String password) {}
+    public record SignInRequest(String username, String password) {
+    }
 }

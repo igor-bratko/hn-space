@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.us:model:0.0.5")
-    implementation("com.us:server-netty:0.0.6")
+    implementation("com.us:model:0.0.6")
+    implementation("com.us:server-netty:0.0.7")
     implementation("com.us:db-apache:0.0.6")
 }
